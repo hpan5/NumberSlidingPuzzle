@@ -1,35 +1,22 @@
-#include<iostream>
+#include <iostream>
+#include <cmath>
 #include "board.h"
 using namespace std;
 
 board::board()
 {
-    tiles = new int*[boardSize];
-    for(size_t i=0; i<boardSize; i++)
-    {
-      tiles[i] = new int[boardSize];
-    }
     this->setup();
+    
 }
 
 board::board(size_t s)
 {
-  tiles = new int*[s];
-  for(size_t i=0; i<s; i++)
-  {
-    tiles[i] = new int[s];
-  }
-  boardSize = s;
-  this->setup();
+  resize(s); 
+  setup();
 }
 
 board::~board()
 {
-  for(size_t i=0; i<boardSize; i++)
-  {
-    delete[] tiles[i];
-  }
-  delete[] tiles;
 }
 
 void board::setup()
@@ -44,6 +31,35 @@ void board::setup()
     }
   }
 }
+
+int board::resize(int size)
+{
+  boardSize = size;
+  tiles.resize(size);
+  for(size_t i=0; i<size; i++)
+  {
+    tiles[i].resize(size);
+  }
+  return boardSize;
+}
+
+void board::loadTiles(vector<int> newTiles)
+{
+  size_t size = sqrt(newTiles.size());
+  if(size*size != newTiles.size()) {
+    size++;
+  }
+  resize(size);
+  for(size_t i=0; i<boardSize; i++)
+  {
+    for(size_t j=0; j<boardSize;j++)
+    {
+      size_t index = i*boardSize+j;
+      tiles[i][j] = index < newTiles.size() ? newTiles[index] : 0;
+    }
+  }
+}
+
 
 void board::display()
 {
