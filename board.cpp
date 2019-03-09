@@ -60,6 +60,10 @@ void board::loadTiles(vector<int> newTiles)
   }
 }
 
+bool board::solveboard()
+{
+  
+}
 
 void board::display()
 {

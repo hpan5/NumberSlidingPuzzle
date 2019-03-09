@@ -6,11 +6,12 @@ using namespace std;
 int main()
 {
     vector<int> scan_num;
-    while(cin) 
+    while(1) 
     {
         int num;
         cin >> num;
-        scan_num.push_back(num);
+        if(cin) scan_num.push_back(num);
+        else break;
     }
     int dim = sqrt(scan_num.size());
     board board(dim);

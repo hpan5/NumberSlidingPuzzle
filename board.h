@@ -14,6 +14,7 @@ public:
     int resize(int size);
     void setup();
     void loadTiles(std::vector<int> newTiles); 
+    bool solveboard();
     void display();
     ~board();
 };
